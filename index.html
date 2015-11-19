@@ -105,7 +105,31 @@
                     <p>
                         On Saturday, 12th of December at 2pm, the hunt will begin!
                     </p>
+                    <p>
+                        <span style="white-space: nowrap" id="countdown"></span>
+                        from now...
+                    </p>
                 </section>
+
+                <section data-state="start" data-background="images/old-style-world-map-3.jpg" data-background-transition="slide">
+                    <p>
+                        The map will appear here... 
+                    </p>
+                </section>
+
+                <!-- <section data-background="images/treasure-map-template-3.jpg">
+                    <p>
+                        Enter Password!
+                    </p>
+                    <input id="password1"/>
+                    <button class="ok">OK</button>
+                </section>
+
+                <section data-background="images/treasure-map-template-3.jpg" data-state="success">
+                    <p>
+                        Success!
+                    </p>
+                </section> -->
 
             </div>
 
@@ -113,8 +137,30 @@
 
         <script src="lib/js/head.min.js"></script>
         <script src="js/reveal.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 
         <script>
+
+            var start = moment("Dec 12 14:00:00", "MMM DD hh:mm:ss");
+            setInterval(function(){
+                var t = moment.duration(start - moment())
+                var countdown = t.days() + " days, " + t.hours() + " hours, " + t.minutes() + " minutes " + t.seconds() + " seconds";
+                document.getElementById("countdown").innerHTML = countdown;
+            }, 1000);
+
+            Reveal.addEventListener( 'success', function() {
+                var password1 = document.getElementById("password1").value;
+                if (password1 != "ok") {
+                    Reveal.prev();
+                }
+            }, false );
+
+            var buttons = document.getElementsByClassName("ok");
+            for (var i=0; i<buttons.length; i++){
+                buttons[i].addEventListener("click", function(){
+                    Reveal.next();
+                });
+            };
 
             // Full list of configuration options available at:
             // https://github.com/hakimel/reveal.js#configuration
