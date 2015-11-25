@@ -112,8 +112,20 @@
                 </section>
 
                 <section data-state="start" data-background="images/old-style-world-map-3.jpg" data-background-transition="slide">
-                    <p>
+                    <p id="placeholder">
                         The map will appear here... 
+                    </p>
+                </section>
+
+                <section data-background="images/treasure-map-template-3.jpg" data-state="maps">
+                    <p>
+                        Placeholder for testing - Remove this when READY, leaving the first Map with data-state="maps"
+                    </p>
+                </section>
+
+                <section data-background="images/treasure-map-template-3.jpg">
+                    <p>
+                        -- MAP! --
                     </p>
                 </section>
 
@@ -142,11 +154,25 @@
         <script>
 
             var start = moment("Dec 12 14:00:00", "MMM DD hh:mm:ss");
+            // var start = moment("Nov 25 23:27:00", "MMM DD hh:mm:ss");
             setInterval(function(){
-                var t = moment.duration(start - moment())
+                var millis = start - moment();
+                if (millis < 0) {
+                    document.getElementById("placeholder").innerHTML = "The map has appeared...";
+                }
+                var t = moment.duration(millis)
                 var countdown = t.days() + " days, " + t.hours() + " hours, " + t.minutes() + " minutes " + t.seconds() + " seconds";
                 document.getElementById("countdown").innerHTML = countdown;
             }, 1000);
+
+            // Don't allow to go to maps before 'start'
+            Reveal.addEventListener( 'maps', function() {
+                var millis = start - moment();
+                if (millis > 0) {
+                    Reveal.prev();
+                }
+            }, false );
+
 
             Reveal.addEventListener( 'success', function() {
                 var password1 = document.getElementById("password1").value;
