@@ -66,6 +66,17 @@
             .parrot:nth-of-type(2n+1) {
                 animation: mymove 3s infinite;
             }
+            @keyframes fadein {
+                0% {opacity: 0;}
+                25% {opacity: 0.5;}
+                50% {opacity: 0.25;}
+                70% {opacity: 0.75;}
+                90% {opacity: 0.5;}
+                100% {opacity: 1;}
+            }
+            .map {
+                animation: fadein 10s ease-in;
+            }
         </style>
 
         <!--[if lt IE 9]>
@@ -151,6 +162,10 @@
                     <p>
                         Placeholder for testing - Remove this when READY, leaving the first Map with data-state="maps"
                     </p>
+                </section>
+
+                <section data-state="start" data-background="images/treasure-map-bg.jpg">
+                    <img src="images/map.jpg" class="map"/>
                 </section>
 
                 <section data-background="images/skeleton.jpg">
