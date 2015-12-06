@@ -50,6 +50,22 @@
                 position: relative;
                 width:500px
             }
+            @keyframes mymove {
+                0% {transform: rotate(-10deg);}
+                50% {transform: rotate(0deg);}
+                100% {transform: rotate(-10deg);}
+            }
+            .reveal section .parrot {
+                border-width: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            .parrot:nth-of-type(2n) {
+                animation: mymove 2s infinite;
+            }
+            .parrot:nth-of-type(2n+1) {
+                animation: mymove 3s infinite;
+            }
         </style>
 
         <!--[if lt IE 9]>
@@ -143,14 +159,42 @@
                         Around his neck is the password you need...
                     </p>
                     <p style="position:relative; top: 100px">
-                        <input id="password1" class="pwd" placeholder="password"/>
+                        <input id="bones" class="pwd" placeholder="password"/>
                         <button class="ok">OK</button>
                     </p>
                 </section>
-
-                <section data-background="images/treasure-map-bg.jpg" data-state="success">
+                <section data-background="images/treasure-map-bg.jpg" data-state="bones">
                     <p>
                         Well done!
+                    </p>
+                    <p>
+                        Now for your next clue...
+                    </p>
+                </section>
+
+
+
+                <section data-background="images/treasure-map-bg.jpg">
+                    <p>
+                        Find 5 parrots - each has a letter.<br>
+                        Enter the letters below...
+                    </p>
+                    <img class="parrot" src="images/parrot.png" />
+                    <img class="parrot" src="images/parrot.png" />
+                    <img class="parrot" src="images/parrot.png" />
+                    <img class="parrot" src="images/parrot.png" />
+                    <img class="parrot" src="images/parrot.png" />
+                    <p>
+                        <input id="polly" class="pwd" placeholder="letters"/>
+                        <button class="ok">OK</button>
+                    </p>
+                </section>
+                <section data-background="images/treasure-map-bg.jpg" data-state="polly">
+                    <p>
+                        Well done!
+                    </p>
+                    <p>
+                        Now for your next clue...
                     </p>
                 </section>
 
@@ -185,9 +229,15 @@
             }, false );
 
 
-            Reveal.addEventListener( 'success', function() {
-                var password1 = document.getElementById("password1").value;
+            Reveal.addEventListener( 'bones', function() {
+                var password1 = document.getElementById("bones").value;
                 if (password1 != "bones") {
+                    Reveal.prev();
+                }
+            }, false );
+            Reveal.addEventListener( 'polly', function() {
+                var password1 = document.getElementById("polly").value;
+                if (password1 != "polly") {
                     Reveal.prev();
                 }
             }, false );
