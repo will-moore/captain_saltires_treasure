@@ -55,7 +55,7 @@
                 50% {transform: rotate(0deg);}
                 100% {transform: rotate(-10deg);}
             }
-            .reveal section .parrot {
+            .reveal section .parrot, .reveal section .bottle {
                 border-width: 0;
                 box-shadow: none;
                 background: transparent;
@@ -76,6 +76,11 @@
             }
             .fadein .map {
                 animation: fadein 10s ease-in;
+            }
+
+            .bottle {
+                width: 150px;
+                animation: mymove 2s infinite;
             }
         </style>
 
@@ -213,6 +218,31 @@
                     </p>
                 </section>
 
+
+                <section data-background="images/treasure-map-bg.jpg">
+                    <p>
+                        Message in a bottle<br>
+                        Enter the letters below...
+                    </p>
+                    <img class="bottle" src="images/bottle.png" />
+                    <img class="bottle" src="images/bottle.png" />
+                    <img class="bottle" src="images/bottle.png" />
+                    <img class="bottle" src="images/bottle.png" />
+                    <p>
+                        <input id="message" class="pwd" placeholder="letters"/>
+                        <button class="ok">OK</button>
+                    </p>
+                </section>
+                <section data-background="images/treasure-map-bg.jpg" data-state="message">
+                    <p>
+                        Well done!
+                    </p>
+                    <p>
+                        Now for your next clue...
+                    </p>
+                </section>
+
+
             </div>
 
         </div>
@@ -253,6 +283,12 @@
             Reveal.addEventListener( 'polly', function() {
                 var password1 = document.getElementById("polly").value;
                 if (password1 != "polly") {
+                    Reveal.prev();
+                }
+            }, false );
+            Reveal.addEventListener( 'message', function() {
+                var password1 = document.getElementById("message").value;
+                if (password1 != "message") {
                     Reveal.prev();
                 }
             }, false );
