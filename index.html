@@ -201,12 +201,6 @@
                     </p>
                 </section>
 
-                <section data-background="images/treasure-map-bg.jpg" data-state="maps">
-                    <p>
-                        Placeholder for testing - Remove this when READY, leaving the first Map with data-state="maps"
-                    </p>
-                </section>
-
                 <section data-state="fadein" data-background="images/treasure-map-bg.jpg">
                     <img src="images/map.jpg" class="map"/>
                 </section>
@@ -231,35 +225,9 @@
                 </section>
 
 
-
                 <section data-background="images/treasure-map-bg.jpg">
                     <p>
-                        Find 5 parrots - each has a letter.<br>
-                        Enter the letters below...
-                    </p>
-                    <img class="parrot" src="images/parrot.png" />
-                    <img class="parrot" src="images/parrot.png" />
-                    <img class="parrot" src="images/parrot.png" />
-                    <img class="parrot" src="images/parrot.png" />
-                    <img class="parrot" src="images/parrot.png" />
-                    <p>
-                        <input id="polly" class="pwd" placeholder="letters"/>
-                        <button class="ok">OK</button>
-                    </p>
-                </section>
-                <section data-background="images/treasure-map-bg.jpg" data-state="polly">
-                    <p>
-                        Well done!
-                    </p>
-                    <p>
-                        Now for your next clue...
-                    </p>
-                </section>
-
-
-                <section data-background="images/treasure-map-bg.jpg">
-                    <p>
-                        Message in a bottle<br>
+                        Find the bottles, but mind the SHARKS!
                         Enter the letters below...
                     </p>
                     <div class="sea">
@@ -284,6 +252,31 @@
                         Well done!
                     </p>
                     <p>
+                        Now for your next clue...
+                    </p>
+                </section>
+
+
+                <section data-background="images/treasure-map-bg.jpg">
+                    <p>
+                        Find 5 parrots - each has a letter.<br>
+                        Enter the letters below...
+                    </p>
+                    <img class="parrot" src="images/parrot.png" />
+                    <img class="parrot" src="images/parrot.png" />
+                    <img class="parrot" src="images/parrot.png" />
+                    <img class="parrot" src="images/parrot.png" />
+                    <img class="parrot" src="images/parrot.png" />
+                    <p>
+                        <input id="polly" class="pwd" placeholder="letters"/>
+                        <button class="ok">OK</button>
+                    </p>
+                </section>
+                <section data-background="images/treasure-map-bg.jpg" data-state="polly">
+                    <p>
+                        Well done!
+                    </p>
+                    <p>
                         Your last clue....
                         Captain Scarlet hid his treasure in his sailing boat.
                         But beware the Captain's ghost that haunts any who try
@@ -302,6 +295,14 @@
 
         <script>
 
+            var checkLetters = function(letters, string) {
+                letters = letters.toLowerCase();
+                string = string.toLowerCase();
+                string = string.split("").sort().join("");
+                letters = letters.split("").sort().join("");
+                return letters === string;
+            }
+
             var start = moment("Dec 12 14:00:00", "MMM DD hh:mm:ss");
             // var start = moment("Nov 25 23:27:00", "MMM DD hh:mm:ss");
             setInterval(function(){
@@ -314,8 +315,8 @@
                 document.getElementById("countdown").innerHTML = countdown;
             }, 1000);
 
-            // Don't allow to go to maps before 'start'
-            Reveal.addEventListener( 'maps', function() {
+            // Don't allow to go to fadein before 'start'
+            Reveal.addEventListener( 'fadein', function() {
                 var millis = start - moment();
                 if (millis > 0) {
                     Reveal.prev();
@@ -325,19 +326,19 @@
 
             Reveal.addEventListener( 'bones', function() {
                 var password1 = document.getElementById("bones").value;
-                if (password1 != "bones") {
+                if (!checkLetters(password1, "bones")) {
                     Reveal.prev();
                 }
             }, false );
             Reveal.addEventListener( 'polly', function() {
                 var password1 = document.getElementById("polly").value;
-                if (password1 != "polly") {
+                if (!checkLetters(password1, "polly")) {
                     Reveal.prev();
                 }
             }, false );
             Reveal.addEventListener( 'message', function() {
                 var password1 = document.getElementById("message").value;
-                if (password1 != "message") {
+                if (!checkLetters(password1, "message")) {
                     Reveal.prev();
                 }
             }, false );
